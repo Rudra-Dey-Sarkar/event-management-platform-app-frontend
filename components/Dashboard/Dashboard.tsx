@@ -80,7 +80,7 @@ function Dashboard() {
                     <div
                         className='w-full bg-white p-5 rounded-t-[10px]'
                         onClick={(e) => e.stopPropagation()}>
-                         <EventModal setIsModalOpen={setIsModalOpen}  />
+                        <EventModal setIsModalOpen={setIsModalOpen} />
                     </div>
                 </div>
             }
@@ -92,10 +92,12 @@ function Dashboard() {
                     onClick={() => ControlAddTask(setIsGuest, user, setAE)}>Add Event</button>
             </div>
             {/* Own Events */}
-            <p className='text-[1.2rem] font-semibold border-b-2 border-gray-200'>Own Events</p>
             {(user.length > 0 && user?.[0]?.email !== "guest") &&
-                <div className='h-fit w-full overflow-x-auto '>
-                    <OwnEvents user={user} setIsModalOpen={setIsModalOpen} />
+                <div>
+                    <p className='text-[1.2rem] font-semibold border-b-2 border-gray-200'>Own Events</p>
+                    <div className='h-fit w-full overflow-x-auto '>
+                        <OwnEvents user={user} setIsModalOpen={setIsModalOpen} />
+                    </div>
                 </div>}
         </div>
     )
