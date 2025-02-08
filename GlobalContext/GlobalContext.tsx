@@ -1,37 +1,45 @@
 "use client"
 import React,{createContext, useEffect, useState} from 'react'
-import { json } from 'stream/consumers';
+
+type EventDataType = [{
+  userId: string,
+  ownerName: string,
+  eventName: string,
+  category: string,
+  description: string,
+  dateAndTime: {
+      date: string,
+      time: string
+  },
+  imageUrl: string,
+  attendees: { name: string }[];
+}]
 
 const GlobalContext = createContext< any | undefined>(undefined);
 
 const GlobalContextWrapper = ({children}:any)=> {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [isPresent, setIsPresent] = useState<boolean>(false);
-    const [sidebar, setSidebar] = useState<boolean>(false);
-    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-    const [isBox, setIsBox]=useState<boolean>(false);
+    const [event, setEvent] = useState<EventDataType[0] | undefined>(undefined);
 
     useEffect(() => {
 
         if (typeof window !== "undefined") {
           const savedIsActive = localStorage.getItem("active");
           const savedIsPresent = localStorage.getItem("present");
-          const savedSidebar = localStorage.getItem("sidebar");
-          const savedDarkMode = localStorage.getItem("darkmode");
-          const savedBox = localStorage.getItem("box");
+          const savedEvent = localStorage.getItem("event");
+ 
 
-          if (savedIsActive && savedIsPresent && savedSidebar && savedDarkMode && savedBox) {
+          if (savedIsActive && savedIsPresent && savedEvent) {
             setIsActive(JSON.parse(savedIsActive));
             setIsPresent(JSON.parse(savedIsPresent));
-            setSidebar(JSON.parse(savedSidebar));
-            setIsDarkMode(JSON.parse(savedDarkMode));
-            setIsBox(JSON.parse(savedBox));
+            setEvent(JSON.parse(savedEvent))
           }
         }
 
       }, []);
   return (
-    <GlobalContext.Provider value={{isActive, setIsActive, isPresent, setIsPresent, sidebar, setSidebar, isDarkMode, setIsDarkMode, isBox, setIsBox}}>
+    <GlobalContext.Provider value={{isActive, setIsActive, isPresent, setIsPresent, event, setEvent}}>
         {children}
     </GlobalContext.Provider>
   )
