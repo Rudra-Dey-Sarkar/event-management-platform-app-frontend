@@ -145,8 +145,8 @@ function Login() {
         className='bg-gray-300 p-2 mt-2 font-semibold'>Login</button>
       <button
         type='button'
-        className='bg-gray-300 p-2 mt-2 font-semibold'
-        onClick={()=>LoginAsGuest(setIsPresent,setIsActive)}>Login as guest</button>
+        className='bg-green-100 p-2 mt-2 font-semibold'
+        onClick={()=>LoginAsGuest(setIsPresent,setIsActive)}>Login As Guest</button>
     </form>
   )
 }
