@@ -81,7 +81,7 @@ function Dashboard() {
                     <div
                         className='w-full bg-white p-5 rounded-t-[10px]'
                         onClick={(e) => e.stopPropagation()}>
-                        <EventModal setIsModalOpen={setIsModalOpen} />
+                        <EventModal user={user} setIsModalOpen={setIsModalOpen} />
                     </div>
                 </div>
             }

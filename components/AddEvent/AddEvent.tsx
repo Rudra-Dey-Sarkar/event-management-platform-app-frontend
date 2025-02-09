@@ -11,6 +11,7 @@ type UserDataType = [{
     password: string
 }]
 type EventDataType = {
+    _id:string,
     userId: string,
     ownerName: string,
     eventName: string,

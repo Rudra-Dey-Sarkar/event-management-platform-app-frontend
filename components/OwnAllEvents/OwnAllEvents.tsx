@@ -25,7 +25,7 @@ type EventDataType = [{
 }]
 async function ViewEvent(userId: string, setEvents: React.Dispatch<React.SetStateAction<any[] | EventDataType>>) {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/view-events`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/view-user-events-details`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -6,6 +6,7 @@ type FileTypes = {
     file: FileList;
 };
 type EventDataType = {
+    _id:string,
     userId: string,
     ownerName: string,
     eventName: string,
