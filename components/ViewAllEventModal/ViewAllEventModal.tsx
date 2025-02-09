@@ -46,7 +46,7 @@ async function ViewSpecificEvent(id: string, setEventDetails: React.Dispatch<Rea
 
 }
 
-function EventModal({ setIsModalOpen, user }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>, user: any[] | UserDataType }) {
+function ViewAllEventModal({ setIsModalOpen, user, eventId }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>, user: any[] | UserDataType, eventId: string | null }) {
     const { event, setEvent }: any = useContext(GlobalContext);
     const { isEventUsed, setIsEventUsed }: any = useContext(GlobalContext);
     const [EP, setEP] = useState<boolean>(false);
@@ -95,7 +95,7 @@ function EventModal({ setIsModalOpen, user }: { setIsModalOpen: React.Dispatch<R
                     className='font-bold text-red-500'
                     onClick={() => { setIsModalOpen(false) }}>Close</button>
             </div>
-            {CompareDateAndTime(event?.dateAndTime?.date, event?.dateAndTime?.time) !== "past" &&
+            {(CompareDateAndTime(event?.dateAndTime?.date, event?.dateAndTime?.time) !== "past" && eventId!== "past" ) &&
                 <div className='sm:flex grid justify-center gap-2'>
 
                     {/* Edit Picture Button */}
@@ -135,4 +135,4 @@ function EventModal({ setIsModalOpen, user }: { setIsModalOpen: React.Dispatch<R
     )
 }
 
-export default EventModal
+export default ViewAllEventModal

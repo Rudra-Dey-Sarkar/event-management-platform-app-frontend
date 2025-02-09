@@ -88,7 +88,7 @@ function AddEvent({ user, setAE }: { user: UserDataType | any[], setAE: React.Di
         name: "attendees",
     });
     return (
-        <div className='relative w-fit h-[90vh] overflow-y-auto p-5'>
+        <div className='relative w-fit sm:h-[90vh] h-[75vh] overflow-y-auto p-5'>
             {isActive === true &&
                 <div className='fixed flex inset-0 justify-center items-center bg-black bg-opacity-50 z-50'
                     onClick={() => setIsActive(false)}>

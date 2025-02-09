@@ -157,9 +157,8 @@ function EditEvent({ user, setEE }: { user: UserDataType | any[], setEE: React.D
                         {errors?.dateAndTime?.time && <p className='text-[12px] text-red-500'>Event Time Is Required</p>}
                     </div>
                 </div>
-                <button
-                    type='submit'
-                    className='bg-gray-300 p-2 mt-2 font-semibold'>Add Event</button>
+                <button                    type='submit'
+                    className='bg-gray-300 p-2 mt-2 font-semibold'>Save Data</button>
             </form>
         </div>
     )

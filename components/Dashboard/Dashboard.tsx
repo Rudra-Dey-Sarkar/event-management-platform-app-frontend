@@ -4,9 +4,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import AddEvent from '../AddEvent/AddEvent';
 import { useRouter } from 'next/navigation';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
-import OwnAllEvents from '../OwnAllEvents/OwnAllEvents';
 import EventModal from '../EventModal/EventModal';
- 
+import OwnTodayEvents from '../OwnTodayEvents/OwnTodayEvents';
+import OwnUpcomingEvents from '../OwnUpcomingEvents/OwnUpcomingEvents';
+import OwnPastEvents from '../OwnPastEvents/OwnPastEvents';
+
 
 type UserDataType = [{
     name: string,
@@ -30,7 +32,6 @@ function Dashboard() {
 
     useEffect(() => {
         const cookies = getCookie("user");
-
         if (cookies !== undefined && typeof cookies === "string") {
             const userCookieData = JSON.parse(cookies);
             setUser(userCookieData);
@@ -93,17 +94,44 @@ function Dashboard() {
                     className='border-2 border-gray-500 px-4 py-1 bg-green-100 rounded-[10px] text-[1rem] font-semibold'
                     onClick={() => ControlAddTask(setIsGuest, user, setAE)}>Add Event</button>
             </div>
-            {/* Own All Events */}
+            {/* Your Events */}
             {(user.length > 0 && user?.[0]?.email !== "guest") &&
                 <div>
-                    <div className='flex justify-between'>
-                        <p className='text-[1.2rem] font-semibold underline'>All Events :-</p>
-                        <button
-                            className='font-semibold underline text-green-500  hover:text-gray-500'
-                        >View All</button>
+                    {/* Own Today Events */}
+                    <div>
+                        <div className='flex justify-between'>
+                            <p className='text-[1.2rem] font-semibold underline'>Today Events :-</p>
+                            <button
+                                className='font-semibold underline text-green-500  hover:text-gray-500'
+                            onClick={()=>router.push("view-all/today")}>View All</button>
+                        </div>
+                        <div className='h-fit w-full overflow-x-auto '>
+                            <OwnTodayEvents user={user} setIsModalOpen={setIsModalOpen} />
+                        </div>
                     </div>
-                    <div className='h-fit w-full overflow-x-auto '>
-                        <OwnAllEvents user={user} setIsModalOpen={setIsModalOpen} />
+                    {/* Own Upcoming Events */}
+                    <div className='border-t-2 border-gray-200'>
+                        <div className='flex justify-between'>
+                            <p className='text-[1.2rem] font-semibold underline'>Upcoming Events :-</p>
+                            <button
+                                className='font-semibold underline text-green-500  hover:text-gray-500'
+                                onClick={()=>router.push("view-all/upcoming")}>View All</button>
+                        </div>
+                        <div className='h-fit w-full overflow-x-auto '>
+                            <OwnUpcomingEvents user={user} setIsModalOpen={setIsModalOpen} />
+                        </div>
+                    </div>
+                    {/* Own Past Events */}
+                    <div className='border-t-2 border-gray-200'>
+                        <div className='flex justify-between'>
+                            <p className='text-[1.2rem] font-semibold underline'>Past Events :-</p>
+                            <button
+                                className='font-semibold underline text-green-500  hover:text-gray-500'
+                                onClick={()=>router.push("view-all/past")}>View All</button>
+                        </div>
+                        <div className='h-fit w-full overflow-x-auto '>
+                            <OwnPastEvents user={user} setIsModalOpen={setIsModalOpen} />
+                        </div>
                     </div>
                 </div>}
         </div>
