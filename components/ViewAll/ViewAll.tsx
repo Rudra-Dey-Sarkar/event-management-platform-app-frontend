@@ -5,7 +5,6 @@ import { GlobalContext } from '../../GlobalContext/GlobalContext';
 import EditEvent from '../EditEvent/EditEvent';
 import { CompareDateAndTime } from '../../actions/CompareDateAndTime';
 import { getCookie } from 'cookies-next';
-import EventModal from '../EventModal/EventModal';
 import ViewAllEventModal from '../ViewAllEventModal/ViewAllEventModal';
 
 type UserDataType = [{

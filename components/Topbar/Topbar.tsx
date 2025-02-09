@@ -188,7 +188,11 @@ function Topbar() {
 
         {isActive === true &&
           <div className='grid gap-y-2 absolute right-0 top-10 bg-white w-[100px] px-2 py-2 border-2 border-gray-500'>
-            <button className='font-semibold w-full px-1 py-1  hover:bg-gray-200'>Profile</button>
+            <button 
+            className='font-semibold w-full px-1 py-1  hover:bg-gray-200'
+            onClick={() => {
+            router.push("/profile");
+            }}>Profile</button>
             <button
               className='font-semibold w-full px-1 py-1 hover:bg-gray-200'
               onClick={() => {

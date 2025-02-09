@@ -8,6 +8,7 @@ import EventModal from '../EventModal/EventModal';
 import OwnTodayEvents from '../OwnTodayEvents/OwnTodayEvents';
 import OwnUpcomingEvents from '../OwnUpcomingEvents/OwnUpcomingEvents';
 import OwnPastEvents from '../OwnPastEvents/OwnPastEvents';
+import GuestTodayAndUpcomingEvents from '../GuestTodayAndUpcomingEvents/GuestTodayAndUpcomingEvents';
 
 
 type UserDataType = [{
@@ -89,13 +90,16 @@ function Dashboard() {
 
             {/* Controlling Add Events */}
             <div className='flex justify-between pb-2 border-b-2 border-gray-200'>
-                <p className='font-bold text-[1.6rem]'>Your Events :-</p>
+                {(user.length > 0 && user?.[0]?.email === "guest") ?
+                    <p className='font-bold text-[1.6rem]'>Public Events :-</p> :
+                    <p className='font-bold text-[1.6rem]'>Your Events :-</p>
+                }
                 <button
                     className='border-2 border-gray-500 px-4 py-1 bg-green-100 rounded-[10px] text-[1rem] font-semibold'
                     onClick={() => ControlAddTask(setIsGuest, user, setAE)}>Add Event</button>
             </div>
             {/* Your Events */}
-            {(user.length > 0 && user?.[0]?.email !== "guest") &&
+            {(user.length > 0 && user?.[0]?.email !== "guest") ?
                 <div>
                     {/* Own Today Events */}
                     <div>
@@ -103,7 +107,7 @@ function Dashboard() {
                             <p className='text-[1.2rem] font-semibold underline'>Today Events :-</p>
                             <button
                                 className='font-semibold underline text-green-500  hover:text-gray-500'
-                            onClick={()=>router.push("view-all/today")}>View All</button>
+                                onClick={() => router.push("view-all/today")}>View All</button>
                         </div>
                         <div className='h-fit w-full overflow-x-auto '>
                             <OwnTodayEvents user={user} setIsModalOpen={setIsModalOpen} />
@@ -115,7 +119,7 @@ function Dashboard() {
                             <p className='text-[1.2rem] font-semibold underline'>Upcoming Events :-</p>
                             <button
                                 className='font-semibold underline text-green-500  hover:text-gray-500'
-                                onClick={()=>router.push("view-all/upcoming")}>View All</button>
+                                onClick={() => router.push("view-all/upcoming")}>View All</button>
                         </div>
                         <div className='h-fit w-full overflow-x-auto '>
                             <OwnUpcomingEvents user={user} setIsModalOpen={setIsModalOpen} />
@@ -127,14 +131,26 @@ function Dashboard() {
                             <p className='text-[1.2rem] font-semibold underline'>Past Events :-</p>
                             <button
                                 className='font-semibold underline text-green-500  hover:text-gray-500'
-                                onClick={()=>router.push("view-all/past")}>View All</button>
+                                onClick={() => router.push("view-all/past")}>View All</button>
                         </div>
                         <div className='h-fit w-full overflow-x-auto '>
                             <OwnPastEvents user={user} setIsModalOpen={setIsModalOpen} />
                         </div>
                     </div>
+                </div> :
+                <div>
+                    {/* Guest Today and Upcoming Events */}
+                    <div className='flex justify-between'>
+                        <p className='text-[1.2rem] font-semibold underline'>Today And Upcoming Events :-</p>
+                        <button
+                            className='font-semibold underline text-green-500  hover:text-gray-500'
+                            onClick={() => setIsGuest(true)}>View All</button>
+                    </div>
+                    <div className='h-fit w-full overflow-x-auto '>
+                        <GuestTodayAndUpcomingEvents />
+                    </div>
                 </div>}
-        </div>
+        </div >
     )
 }
 
