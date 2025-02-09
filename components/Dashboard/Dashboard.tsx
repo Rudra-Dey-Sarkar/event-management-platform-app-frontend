@@ -4,8 +4,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import AddEvent from '../AddEvent/AddEvent';
 import { useRouter } from 'next/navigation';
 import { GlobalContext } from '../../GlobalContext/GlobalContext';
-import OwnEvents from '../OwnEvents/OwnEvents';
+import OwnAllEvents from '../OwnAllEvents/OwnAllEvents';
 import EventModal from '../EventModal/EventModal';
+ 
 
 type UserDataType = [{
     name: string,
@@ -84,19 +85,25 @@ function Dashboard() {
                     </div>
                 </div>
             }
+
             {/* Controlling Add Events */}
-            <div className='flex  justify-between'>
-                <p className='font-bold text-[1.6rem] underline'>Events Details :-</p>
+            <div className='flex justify-between pb-2 border-b-2 border-gray-200'>
+                <p className='font-bold text-[1.6rem]'>Your Events :-</p>
                 <button
                     className='border-2 border-gray-500 px-4 py-1 bg-green-100 rounded-[10px] text-[1rem] font-semibold'
                     onClick={() => ControlAddTask(setIsGuest, user, setAE)}>Add Event</button>
             </div>
-            {/* Own Events */}
+            {/* Own All Events */}
             {(user.length > 0 && user?.[0]?.email !== "guest") &&
                 <div>
-                    <p className='text-[1.2rem] font-semibold border-b-2 border-gray-200'>Own Events</p>
+                    <div className='flex justify-between'>
+                        <p className='text-[1.2rem] font-semibold underline'>All Events :-</p>
+                        <button
+                            className='font-semibold underline text-green-500  hover:text-gray-500'
+                        >View All</button>
+                    </div>
                     <div className='h-fit w-full overflow-x-auto '>
-                        <OwnEvents user={user} setIsModalOpen={setIsModalOpen} />
+                        <OwnAllEvents user={user} setIsModalOpen={setIsModalOpen} />
                     </div>
                 </div>}
         </div>

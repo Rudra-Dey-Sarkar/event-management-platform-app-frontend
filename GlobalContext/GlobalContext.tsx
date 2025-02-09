@@ -20,6 +20,7 @@ const GlobalContext = createContext< any | undefined>(undefined);
 const GlobalContextWrapper = ({children}:any)=> {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [isPresent, setIsPresent] = useState<boolean>(false);
+    const [isEventUsed, setIsEventUsed] = useState<boolean>(false);
     const [event, setEvent] = useState<EventDataType[0] | undefined>(undefined);
 
     useEffect(() => {
@@ -28,18 +29,20 @@ const GlobalContextWrapper = ({children}:any)=> {
           const savedIsActive = localStorage.getItem("active");
           const savedIsPresent = localStorage.getItem("present");
           const savedEvent = localStorage.getItem("event");
+          const savedEventUsed = localStorage.getItem("eventUsed");
  
 
-          if (savedIsActive && savedIsPresent && savedEvent) {
+          if (savedIsActive && savedIsPresent && savedEvent && savedEventUsed) {
             setIsActive(JSON.parse(savedIsActive));
             setIsPresent(JSON.parse(savedIsPresent));
-            setEvent(JSON.parse(savedEvent))
+            setEvent(JSON.parse(savedEvent));
+            setEvent(JSON.parse(savedEventUsed));
           }
         }
 
       }, []);
   return (
-    <GlobalContext.Provider value={{isActive, setIsActive, isPresent, setIsPresent, event, setEvent}}>
+    <GlobalContext.Provider value={{isActive, setIsActive, isPresent, setIsPresent, isEventUsed, setIsEventUsed ,event, setEvent}}>
         {children}
     </GlobalContext.Provider>
   )
